@@ -1,6 +1,8 @@
 ep_exportmail
 =============
 
+![Example use of ep_exportmail](static/screenshot.png)
+
 This plugin adds a new export option to send the content of the current revision of an etherpad via mail. All options of sending the mail (SMTP-Connection, Reciever) are currently set in the settings.
 
 
@@ -32,6 +34,7 @@ Add the following or similar default to your settings at </admin/settings> or `s
       "authMethod": "CRAM-MD5"
     },
     "email": {
+        "from": "user@example.com",
         "to": [
             "anna@example.com",
             "bob@example.com"
