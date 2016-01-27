@@ -1,6 +1,7 @@
 var eejs = require('ep_etherpad-lite/node/eejs');
 var nodemailer = require('nodemailer');
 var settings = require('ep_etherpad-lite/node/utils/Settings');
+var exportTxt = require('ep_etherpad-lite/node/utils/ExportTxt')
 
 exports.eejsBlock_exportColumn = function(hook_name, args, cb){
     args.content = args.content + eejs.require("ep_sendmail/templates/exportcolumn.ejs", {}, module);
@@ -16,7 +17,9 @@ exports.expressCreateServer = function (hook_name, args, cb) {
     args.app.get('/p/:pad/:rev?/export/mail', function(req, res, next) {
         var padID = req.params.pad;
         var emailOptions = (settings.ep_sendmail || {}).config;
-        if(emailOptions){
+        var txt = "";
+
+        var sendMail = function(txt) {
             var transporter = nodemailer.createTransport(emailOptions);
 
             // setup e-mail data with unicode symbols 
@@ -24,8 +27,7 @@ exports.expressCreateServer = function (hook_name, args, cb) {
                 from: 'Fred Foo <martin@goth-1.de>', // sender address 
                 to: ['ep-sendmail@ziisch.de'], // list of receivers 
                 subject: 'Pad ' + padID, // Subject line 
-                text: 'Hello world', // plaintext body 
-                html: '<b>Hello world</b>' // html body 
+                text: txt
             };
              
             // send mail with defined transport object 
@@ -33,8 +35,15 @@ exports.expressCreateServer = function (hook_name, args, cb) {
                 if(error){
                     return console.log(info+"\n"+error);
                 }
-                console.log('Message sent: ' + info.response);
             });
-        }
+        };
+
+        exportTxt.getPadTXTDocument(padID, req.params.rev, false, function(err, _txt)
+        {
+            txt = _txt;
+            if(emailOptions){
+                sendMail(txt);
+            }
+        });
     });
 };
