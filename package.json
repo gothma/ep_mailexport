@@ -1,0 +1,24 @@
+{
+  "name": "ep_sendmail",
+  "version": "0.0.1",
+  "description": "Export pads via mail",
+  "author": {
+    "name": "gothm",
+    "email": "martin@goth-1.de",
+    "url": "Martin Goth"
+  },
+  "contributors": [],
+  "dependencies": {
+    "sendmail": ">= 0.2.1"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "readme": "ep_base\n=======\n\nA sample etherpad-lite plugin\n\n# notes\n    replace all CAPITALIZED names with whatever you want\n\n# installing\n\n    npm install PATH/TO/THIS/FOLDER (from your etherpad-lite folder)\n",
+  "readmeFilename": "README.md",
+  "_id": "ep_sendmail@0.0.1",
+  "scripts": {},
+  "_shasum": "637ee70c36fc40d40a5eee76e0c449fee9212739",
+  "_from": "plugins-available/ep_sendmail",
+  "_resolved": "file:plugins-available/ep_sendmail"
+}
