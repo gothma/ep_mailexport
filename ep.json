@@ -3,7 +3,9 @@
         {
             "name": "sendmail",
             "hooks": {
-                "eejsBlock_exportColumn" : "ep_sendmail/index"
+                "expressCreateServer": "ep_sendmail/index",
+                "eejsBlock_exportColumn" : "ep_sendmail/index",
+                "eejsBlock_scripts": "ep_sendmail/index"
             }
         }
     ]
