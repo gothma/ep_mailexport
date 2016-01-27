@@ -4,6 +4,7 @@
   "description": "Export etherpad lite pads via mail and smtp",
   "author": "gothma (Martin Goth) <ep-mailexport@ziisch.de>",
   "contributors": [],
+  "license": "MIT",
   "dependencies": {
     "nodemailer": ">= 2.0.0"
   },
