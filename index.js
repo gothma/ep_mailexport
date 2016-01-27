@@ -4,19 +4,19 @@ var settings = require('ep_etherpad-lite/node/utils/Settings');
 var exportTxt = require('ep_etherpad-lite/node/utils/ExportTxt')
 
 exports.eejsBlock_exportColumn = function(hook_name, args, cb){
-    args.content = args.content + eejs.require("ep_sendmail/templates/exportcolumn.ejs", {}, module);
+    args.content = args.content + eejs.require("ep_mailexport/templates/exportcolumn.ejs", {}, module);
   return cb();
 }
 
 exports.eejsBlock_scripts = function (hook_name, args, cb) {
-    args.content = args.content + eejs.require("ep_sendmail/templates/scripts.ejs", {}, module);
+    args.content = args.content + eejs.require("ep_mailexport/templates/scripts.ejs", {}, module);
     return cb();
 };
 
 exports.expressCreateServer = function (hook_name, args, cb) {
     args.app.get('/p/:pad/:rev?/export/mail', function(req, res, next) {
         var padID = req.params.pad;
-        var emailOptions = (settings.ep_sendmail || {}).config;
+        var emailOptions = (settings.ep_mailexport || {}).config;
         var txt = "";
 
         var sendMail = function(txt) {
