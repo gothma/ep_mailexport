@@ -16,32 +16,33 @@ exports.eejsBlock_scripts = function (hook_name, args, cb) {
 exports.expressCreateServer = function (hook_name, args, cb) {
     args.app.get('/p/:pad/:rev?/export/mail', function(req, res, next) {
         var padID = req.params.pad;
-        var emailOptions = (settings.ep_mailexport || {}).config;
-        var txt = "";
+        var pluginConfig = settings.ep_mailexport || {};
+        var transportOptions = pluginConfig.config;
+        var contentOptions = pluginConfig.email;
 
         var sendMail = function(txt) {
-            var transporter = nodemailer.createTransport(emailOptions);
+            var transporter = nodemailer.createTransport(transportOptions);
 
-            // setup e-mail data with unicode symbols 
-            var mailOptions = {
-                from: 'Fred Foo <martin@goth-1.de>', // sender address 
-                to: ['ep-sendmail@ziisch.de'], // list of receivers 
-                subject: 'Pad ' + padID, // Subject line 
+            var content = {
+                subject: padID,
                 text: txt
             };
+
+            for (var attrname in contentOptions) {
+                content[attrname] = contentOptions[attrname];
+            }
              
             // send mail with defined transport object 
-            transporter.sendMail(mailOptions, function(error, info){
+            transporter.sendMail(content, function(error, info){
                 if(error){
                     return console.log(info+"\n"+error);
                 }
             });
         };
 
-        exportTxt.getPadTXTDocument(padID, req.params.rev, false, function(err, _txt)
+        exportTxt.getPadTXTDocument(padID, req.params.rev, false, function(err, txt)
         {
-            txt = _txt;
-            if(emailOptions){
+            if(pluginConfig){
                 sendMail(txt);
             }
         });
