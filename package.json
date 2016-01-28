@@ -2,7 +2,7 @@
   "name": "ep_mailexport",
   "version": "0.0.1",
   "description": "Export etherpad lite pads via mail and smtp",
-  "author": "gothma (Martin Goth) <ep-mailexport@ziisch.de>",
+  "author": "gothma (Martin Goth) <ep_mailexport@ziisch.de>",
   "contributors": [],
   "license": "MIT",
   "dependencies": {
@@ -12,9 +12,5 @@
     "node": ">= 0.6.0"
   },
   "readmeFilename": "README.md",
-  "_id": "ep_mailexport@0.0.1",
-  "scripts": {},
-  "_shasum": "637ee70c36fc40d40a5eee76e0c449fee9212739",
-  "_from": "plugins-available/ep_mailexport",
-  "_resolved": "file:plugins-available/ep_mailexport"
+  "repository": "https://github.com/gothma/ep_mailexport"
 }
