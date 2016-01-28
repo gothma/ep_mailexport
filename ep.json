@@ -3,9 +3,9 @@
         {
             "name": "mailexport",
             "hooks": {
-                "expressCreateServer": "ep_mailexport/index",
-                "eejsBlock_exportColumn" : "ep_mailexport/index",
-                "eejsBlock_scripts": "ep_mailexport/index"
+                "expressCreateServer": "ep_mailexport/hooks",
+                "eejsBlock_exportColumn" : "ep_mailexport/hooks",
+                "eejsBlock_scripts": "ep_mailexport/hooks"
             }
         }
     ]
